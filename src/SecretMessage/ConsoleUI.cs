@@ -16,6 +16,7 @@ namespace SecretMessage
                 Console.WriteLine("Please select one of the following functions using the keyboard, then press Enter.");
                 Console.WriteLine("Create a secret message (press 1)");
                 Console.WriteLine("Decode a secret message (press 2)");
+                Console.WriteLine("Decode a key, using two secret messages (press 3)");
 
                 int option = int.Parse(Console.ReadLine());
 
@@ -39,14 +40,33 @@ namespace SecretMessage
                         string secretInput = Console.ReadLine();
                         Console.Write("Please enter the key:");
                         string keyInput_1 = Console.ReadLine();
-
                         SecretDecode sd = new SecretDecode(keyInput_1, secretInput);
                         Console.WriteLine($"The decoded message:{sd.Decode()}");
                         Console.WriteLine("Press any key to return to the menu.");
                         Console.ReadKey();
                         break;
+
+                    case 3:
+                        Console.Clear();
+                        Console.Write("Please enter the dictionary file path: ");
+                        ConsoleUI.ReadFile(Console.ReadLine());
+                        Console.Clear();
+                        Console.Write("Please enter the first encrypted message: ");
+                        string secretInput_1 = Console.ReadLine();
+                        Console.Write("Please enter the second encrypted message: ");
+                        string secretInput_2 = Console.ReadLine();
+                        // Not implemented: method that returns possible keys
+                        Console.WriteLine("Press any key to return to the menu...");
+                        Console.ReadKey();
+                        break;
                 }
             }
+        }
+
+        public static string[] ReadFile(string filepath)
+        {
+            string[] strings = File.ReadAllLines(filepath);
+            return strings;
         }
 
     }
